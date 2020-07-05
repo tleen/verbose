@@ -1,0 +1,28 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout V
+        uses: actions/checkout@v2
+        with:
+          repository: vlang/v
+      - name: Checkout verbose
+        uses: actions/checkout@v2
+        with:
+          path: tmp/verbose
+      - name: Build V
+        run: |
+          make
+          sudo ./v symlink
+      - name: Run Tests
+        run: |
+          cd ./tmp/verbose/
+          v test .
+      - name: Run Examples
+        run: |
+          cd ./tmp/verbose/
+          v run examples/
