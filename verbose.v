@@ -23,7 +23,8 @@ pub fn init() int {
 	sep := os.path_separator
 	mut d := &Dictionary(dictionary)
 	mut path_components := @FILE.split(sep)
-	path_components[path_components.len - 1] = '.'
+	// Remove this filename to get the directory path.
+	path_components.delete(path_components.len - 1)
 	path_components << ['data', 'en']
 	path := path_components.join(sep) + sep
 	// TODO: Is there an effective way to loop on this?
