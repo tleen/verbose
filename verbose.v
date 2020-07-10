@@ -20,13 +20,22 @@ const (
 // eventually when $embed_file('path') is ready we can use that.
 pub fn init() int {
 	// Thanks to `!! ryan` on vlang discord for the initialization approach.
-	sep := os.path_separator
 	mut d := &Dictionary(dictionary)
-	mut path_components := @FILE.split(sep)
-	// Remove this filename to get the directory path.
-	path_components.delete(path_components.len - 1)
-	path_components << ['data', 'en']
-	path := path_components.join(sep) + sep
+	// Why an env var? Because if this module is not in the compilation path
+	// it won't be able to locate the relative data directory, you will
+	// have to supply it explicitly. End slash and all!
+	// Again, $embed_file('path') will remove these requirements.
+	mut path := os.getenv('VERBOSE_DATA_PATH')
+	if path == '' {
+		sep := os.path_separator
+		mut path_components := @FILE.split(sep)
+		// Remove this filename to get the directory path.
+		path_components.delete(path_components.len - 1)
+		path_components << ['data', 'en']
+		path = path_components.join(sep) + sep
+	} else {
+		println('verbose using data path $path')
+	}
 	// TODO: Is there an effective way to loop on this?
 	println('reading dictionary files from $path')
 	adjectives := os.read_file(path + 'adjectives.txt') or {
