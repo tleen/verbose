@@ -27,8 +27,10 @@ pub fn init() int {
 	path_components << ['data', 'en']
 	path := path_components.join(sep) + sep
 	// TODO: Is there an effective way to loop on this?
+	println('reading dictionary files from $path')
 	adjectives := os.read_file(path + 'adjectives.txt') or {
 		println('could not read adjectives')
+		println(err)
 		return 0
 	}
 	d.adjective << adjectives.trim_right('\n').split('\n')
