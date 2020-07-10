@@ -1,6 +1,7 @@
 import verbose
 
 fn main() {
+	verbose.init()
 	println('phrase: ' + verbose.generate('adverb-adjective-verb-noun'))
 	// phrase: tepidly-rattier-permeates-albany
 	println('adjective: ' + verbose.adjective())

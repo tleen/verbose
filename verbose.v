@@ -18,7 +18,7 @@ const (
 
 // init loads up the word lists from ./data/en/*.txt
 // eventually when $embed_file('path') is ready we can use that.
-fn init() int {
+pub fn init() int {
 	// Thanks to `!! ryan` on vlang discord for the initialization approach.
 	sep := os.path_separator
 	mut d := &Dictionary(dictionary)
@@ -49,6 +49,10 @@ fn init() int {
 // random will return a single random string from an array of strings
 fn random(strings &[]string) string {
 	max := strings.len
+	if max == 0 {
+		println('verbose can not return a value from an empty word pool')
+		return '?'
+	}
 	index := rand.intn(max)
 	return strings[index]
 }
@@ -88,6 +92,7 @@ pub fn generate(pattern string) string {
 			'adverb' { pool = dictionary.adverb }
 			else {}
 		}
+		println('pool len: $pool.len')
 		returner[i] = random(pool)
 	}
 	return returner.join('-')
