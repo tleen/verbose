@@ -1,4 +1,4 @@
-import verbose
+import tleen.verbose
 
 fn main() {
 	verbose.init()
