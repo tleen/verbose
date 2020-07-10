@@ -92,7 +92,6 @@ pub fn generate(pattern string) string {
 			'adverb' { pool = dictionary.adverb }
 			else {}
 		}
-		println('pool len: $pool.len')
 		returner[i] = random(pool)
 	}
 	return returner.join('-')
