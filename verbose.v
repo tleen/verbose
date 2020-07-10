@@ -28,21 +28,26 @@ pub fn init() int {
 	path := path_components.join(sep) + sep
 	// TODO: Is there an effective way to loop on this?
 	adjectives := os.read_file(path + 'adjectives.txt') or {
+		println('could not read adjectives')
 		return 0
 	}
 	d.adjective << adjectives.trim_right('\n').split('\n')
 	adverbs := os.read_file(path + 'adverbs.txt') or {
+		println('could not read adverbs')
 		return 0
 	}
 	d.adverb << adverbs.trim_right('\n').split('\n')
 	nouns := os.read_file(path + 'nouns.txt') or {
+		println('could not read nouns')
 		return 0
 	}
 	d.noun << nouns.trim_right('\n').split('\n')
 	verbs := os.read_file(path + 'verbs.txt') or {
+		println('could not read verbs')
 		return 0
 	}
 	d.verb << verbs.trim_right('\n').split('\n')
+	println('-> size of dictionary (adjective: $d.adjective.len) (adverb: $d.adverb.len) (noun: $d.noun.len) (verb: $d.verb.len)')
 	return 1
 }
 
