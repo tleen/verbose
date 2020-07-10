@@ -1,7 +1,7 @@
 Module {
 	name: 'verbose'
 	author: 'tleen'
-	version: '0.0.1'
+	version: '0.0.2'
 	repo_url: 'https://github.com/tleen/verbose'
 	vcs: 'git'
 	tags: ['words', 'random']
