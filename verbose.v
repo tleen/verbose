@@ -27,14 +27,12 @@ fn init() {
 	// Again, $embed_file('path') will remove these requirements.
 	mut path := os.getenv('VERBOSE_DATA_PATH')
 	if path == '' {
-		sep := os.path_separator
-		mut path_components := @FILE.split(sep)
-		// Remove this filename to get the directory path.
-		path_components.delete(path_components.len - 1)
-		path_components << ['data', 'en']
-		path = path_components.join(sep) + sep
+		path = os.join_path(os.dir(@FILE), 'data', 'en')
 	} else {
-		println('verbose using data path $path')
+		println('verbose using env data path: $path')
+	}
+	if !path.ends_with(os.path_separator) {
+		path += os.path_separator
 	}
 	// TODO: Is there an effective way to loop on this?
 	println('reading dictionary files from $path')
