@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4] - 2020-07-12
+
+## Changed
+
+- Use the standard lib for file path operations.
+- Fix broken signature for init().
+
 ## [0.0.3] - 2020-07-10
 
 ### Added
