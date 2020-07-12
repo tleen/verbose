@@ -18,7 +18,7 @@ const (
 
 // init loads up the word lists from ./data/en/*.txt
 // eventually when $embed_file('path') is ready we can use that.
-pub fn init() int {
+fn init() {
 	// Thanks to `!! ryan` on vlang discord for the initialization approach.
 	mut d := &Dictionary(dictionary)
 	// Why an env var? Because if this module is not in the compilation path
@@ -41,26 +41,25 @@ pub fn init() int {
 	adjectives := os.read_file(path + 'adjectives.txt') or {
 		println('could not read adjectives')
 		println(err)
-		return 0
+		return
 	}
 	d.adjective << adjectives.trim_right('\n').split('\n')
 	adverbs := os.read_file(path + 'adverbs.txt') or {
 		println('could not read adverbs')
-		return 0
+		return
 	}
 	d.adverb << adverbs.trim_right('\n').split('\n')
 	nouns := os.read_file(path + 'nouns.txt') or {
 		println('could not read nouns')
-		return 0
+		return
 	}
 	d.noun << nouns.trim_right('\n').split('\n')
 	verbs := os.read_file(path + 'verbs.txt') or {
 		println('could not read verbs')
-		return 0
+		return
 	}
 	d.verb << verbs.trim_right('\n').split('\n')
 	println('-> size of dictionary (adjective: $d.adjective.len) (adverb: $d.adverb.len) (noun: $d.noun.len) (verb: $d.verb.len)')
-	return 1
 }
 
 // random will return a single random string from an array of strings
